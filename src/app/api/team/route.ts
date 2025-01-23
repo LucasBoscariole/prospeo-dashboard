@@ -63,59 +63,48 @@ const mockTeamMembers: ITeamMember[] = [
 ];
 
 export async function POST(request: Request) {
-  try {
-    const session = request.headers.get("x-prospeo-session");
+  const session = request.headers.get("x-prospeo-session");
 
-    mockData.response.current_tier = session ? "PAID" : "FREE";
+  mockData.response.current_tier = session ? "PAID" : "FREE";
 
-    if (!session) {
-      return NextResponse.json(
-        {
-          req_status: false,
-          error_toast: "Your plan doesn't support team.",
-        },
-        { status: 500 }
-      );
-    }
-
-    const body = await request.json();
-    const { page } = body;
-
-    if (typeof page !== "number" || page < 1) {
-      return NextResponse.json(
-        {
-          req_status: false,
-          error_toast: "Invalid request: 'page' must be a positive number.",
-        },
-        { status: 400 }
-      );
-    }
-
-    mockData.response.permissions =
-      session === "admin"
-        ? {
-            crm: true,
-            team_management: true,
-            billing_management: true,
-          }
-        : {
-            crm: false,
-            team_management: true,
-            billing_management: true,
-          };
-    mockData.response.team_members = session === "admin" ? [] : mockTeamMembers;
-
-    return NextResponse.json(mockData, { status: 200 });
-  } catch (error) {
-    console.log(error);
+  if (!session) {
     return NextResponse.json(
       {
         req_status: false,
-        error_toast: "Method Not Allowed",
+        error_toast: "Your plan doesn't support team.",
       },
-      { status: 405 }
+      { status: 500 }
     );
   }
+
+  const body = await request.json();
+  const { page } = body;
+
+  if (typeof page !== "number" || page < 1) {
+    return NextResponse.json(
+      {
+        req_status: false,
+        error_toast: "Invalid request: 'page' must be a positive number.",
+      },
+      { status: 400 }
+    );
+  }
+
+  mockData.response.permissions =
+    session === "admin"
+      ? {
+          crm: true,
+          team_management: true,
+          billing_management: true,
+        }
+      : {
+          crm: false,
+          team_management: true,
+          billing_management: true,
+        };
+  mockData.response.team_members = session === "admin" ? [] : mockTeamMembers;
+
+  return NextResponse.json(mockData, { status: 200 });
 }
 
 export async function OPTIONS() {
