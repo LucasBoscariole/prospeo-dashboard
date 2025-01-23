@@ -6,7 +6,7 @@ export const CRMRemovalModal: React.FC<{
   open: boolean;
   setOpen: React.Dispatch<string | null>;
   callback: () => void;
-}> = ({ open, setOpen }) => {
+}> = ({ open, setOpen, callback }) => {
   const handleClose = () => {
     setOpen(null);
   };
@@ -33,8 +33,16 @@ export const CRMRemovalModal: React.FC<{
           User will have to ask another team admin to give you permission again.
         </p>
         <div className="mt-4 grid grid-cols-2 gap-4">
-          <button className="white-button">Keep permissions</button>
-          <button className="bg-red-light-100  rounded-lg flex items-center justify-center text-red-default gap-2 font-medium h-10 text-sm">
+          <button onClick={handleClose} className="white-button">
+            Keep permissions
+          </button>
+          <button
+            onClick={() => {
+              callback();
+              handleClose();
+            }}
+            className="bg-red-light-100  rounded-lg flex items-center justify-center text-red-default gap-2 font-medium h-10 text-sm"
+          >
             Continue
           </button>
         </div>

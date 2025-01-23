@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 const mockData: TeamData = {
   req_status: true,
   response: {
-    current_tier: "PAID",
+    current_tier: "FREE",
     seats: {
       current: 0,
       maximum: 3,

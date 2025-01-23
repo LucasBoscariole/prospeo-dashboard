@@ -72,7 +72,7 @@ export const TeamMembersClient = () => {
         {/* Table Rows */}
         {teamData?.response?.team_members.map(
           (member: ITeamMember, index: number) => {
-            const isCurrentUser = member.user_oid === "1";
+            const isCurrentUser = index === 0
             return (
               <div
                 key={index}

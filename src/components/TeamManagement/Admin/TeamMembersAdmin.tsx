@@ -54,7 +54,7 @@ export const TeamMembersAdmin = () => {
       if (crmCount === 1 && !value) {
         setOpenCRMModal(true);
         return;
-      } else if (!pass) {
+      } else if (!pass  && !value) {
         setOpenCRMRemovalModal(id);
         return;
       }
@@ -105,7 +105,7 @@ export const TeamMembersAdmin = () => {
     toast.success("Member invite removed");
   };
 
-  if (teamData?.response?.team_members.length === 0) {
+  if (teamData?.response?.team_members.length === 0 || teamData?.response?.team_members === undefined) {
     return (
       <div className="mt-4 bg-white border-sidebar-border py-4 px-6 rounded-2xl flex items-center justify-between">
         <h3 className="text-black text-xl font-medium">No team members yet</h3>
@@ -168,7 +168,8 @@ export const TeamMembersAdmin = () => {
 
         {/* Table Rows */}
         {teamData?.response?.team_members.map(
-          (member: ITeamMember, index: number) => (
+          (member: ITeamMember, index: number) =>{ 
+            return (
             <div
               key={index}
               className="grid grid-cols-[0.25fr_0.25fr_0.20fr_0.1745fr_0.1255fr] gap-4 py-2 border-b border-gray-100"
@@ -207,7 +208,7 @@ export const TeamMembersAdmin = () => {
                 })}
               </div>
               <div className="px-6 flex items-center">
-                {member?.action === "leave" && member?.user_oid === "1" ? (
+                {member?.action === "leave" && index === 0 ? (
                   <button
                     className="bg-red-light-100  rounded-lg flex items-center justify-center text-red-default gap-2 font-medium !h-7 !text-xs !px-2"
                     onClick={() => handleLeave(member?.user_oid, true)}
@@ -239,45 +240,49 @@ export const TeamMembersAdmin = () => {
                 />
               </div>
             </div>
-          )
+          )}
         )}
 
         {/* Bottom Navigation */}
-        <div className="flex justify-between items-center mt-4 px-4">
-          <span className="text-base text-dark pl-6">
-            1 - 3 of {teamData?.response?.team_members?.length}
-          </span>
-          <div className="flex items-center gap-2">
-            <button>
-              <Image
-                src={"/images/icons/chevron_left.svg"}
-                alt="chevron_left"
-                width={16}
-                height={16}
-              />
-            </button>
-            <div className="flex gap-1">
-              {Array.from({ length: 1 }, (_, i) => (
-                <button
-                  key={i}
-                  className={`text-base text-dark ${
-                    i === 0 ? "font-bold" : "font-normal"
-                  }`}
-                >
-                  {i + 1}
-                </button>
-              ))}
+        {teamData?.response?.team_members && teamData?.response?.team_members.length > 0 ? (
+          <div className="flex justify-between items-center mt-4 px-4">
+            <span className="text-base text-dark pl-6">
+              1 - 3 of {teamData?.response?.team_members?.length}
+            </span>
+            <div className="flex items-center gap-2">
+              <button>
+                <Image
+                  src={"/images/icons/chevron_left.svg"}
+                  alt="chevron_left"
+                  width={16}
+                  height={16}
+                />
+              </button>
+              <div className="flex gap-1">
+                {Array.from({ length: 1 }, (_, i) => (
+                  <button
+                    key={i}
+                    className={`text-base text-dark ${
+                      i === 0 ? "font-bold" : "font-normal"
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+              <button>
+                <Image
+                  src={"/images/icons/chevron_right.svg"}
+                  alt="chevron_right"
+                  width={16}
+                  height={16}
+                />
+              </button>
             </div>
-            <button>
-              <Image
-                src={"/images/icons/chevron_right.svg"}
-                alt="chevron_right"
-                width={16}
-                height={16}
-              />
-            </button>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
       <SystemLogs />
     </>

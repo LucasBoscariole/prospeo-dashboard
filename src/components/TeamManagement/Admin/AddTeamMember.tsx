@@ -49,7 +49,7 @@ export const AddTeamMember = () => {
     if (response.req_status) {
       addTeamMember({
         user_oid: (
-          (teamData?.response?.team_members?.length ?? 0) + 1
+          Math.random() * 2120
         ).toString(),
         name: namesMock[teamData?.response?.team_members?.length ?? 0],
         email: email,

@@ -65,6 +65,10 @@ export const useTeamStore = create<TeamStore>((set) => ({
           ...state.teamData,
           response: {
             ...state.teamData.response,
+            seats: {
+              current: state.teamData.response?.seats?.current - 1,
+              maximum: state.teamData.response?.seats.maximum,
+            },
             team_members: updatedTeamMembers,
           },
         },
