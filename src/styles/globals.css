@@ -3,10 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body,
-* {
-  font-family: "IBM Plex Sans", serif;
+body {
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
+  background: #f6f6f6;
 }
 
 .main-button {
@@ -19,10 +19,81 @@ body,
   height: 40px;
   background: #ff1a26;
   border-radius: 8px;
-  font-family: "IBM Plex Sans", serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 21px;
   color: #ffffff;
+}
+
+.red-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+  height: 40px;
+  background: #ff1a26;
+  border-radius: 8px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ffffff;
+}
+
+.white-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #161616;
+  transition: all 200ms;
+}
+.white-button:hover {
+  background: #e6e6e6;
+}
+
+/* Default Checkbox Style */
+.checkbox {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #8c8c8c;
+  border-radius: 3px;
+  position: relative;
+
+  z-index: 1;
+}
+
+.checkbox.active {
+  background: #ff1a26;
+  border: 1px solid #ff1a26;
+}
+
+.checkbox.active::after {
+  content: "";
+  width: 11px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 5px;
 }

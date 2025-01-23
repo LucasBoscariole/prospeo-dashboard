@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../styles/globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { TopBar } from "@/components/TopBar";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Prospeo Dashboard",
@@ -37,10 +38,13 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className="flex h-screen">
+        <Toaster position="top-center" reverseOrder={false} />
         <Sidebar />
         <div className="w-full">
           <TopBar />
-          <main className="h-[calc(100vh_-_88px)] overscroll-auto">{children}</main>
+          <main className="h-[calc(100vh_-_88px)] overscroll-auto">
+            {children}
+          </main>
         </div>
       </body>
     </html>

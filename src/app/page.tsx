@@ -1,17 +1,18 @@
-/* eslint-disable @next/next/no-img-element */
-import { Modal } from "@/components/Modal";
+import { AddTeamMembers } from "@/components/Modals/AddTeamMembers";
+import { PlanModal } from "@/components/Modals/PlanModal";
+import { TeamManagementWrapper } from "@/components/TeamManagement/TeamManagementWrapper";
+import { TeamService } from "@/services/team.service";
+import { TeamData } from "@/types/ITeam";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch team data server-side
+  const teamDataAPI: TeamData = await TeamService.getTeam(1);
+
   return (
     <>
-      <Modal open={true}>
-        <img src="/images/modal_image.png" alt="modal_image" className="h-[100px] w-auto object-scale-down"/>
-        <div>
-          <h1 className="text-xl text-dark font-medium mb-1 text-center">Team is not available in the Free plan.</h1>
-          <p className="text-grey-800 text-sm text-center">Upgrade now and invite your colleagues!</p>
-        </div>
-        <button className="main-button !h-[49px]">See our plans</button>
-      </Modal>
+      <PlanModal isFreePlan={teamDataAPI?.response?.current_tier === "FREE" || teamDataAPI?.req_status === false} />
+      <AddTeamMembers isOpen={teamDataAPI?.response?.team_members.length === 0 && teamDataAPI?.response?.current_tier !== "FREE"} />
+      <TeamManagementWrapper teamDataAPI={teamDataAPI}/>
     </>
   );
 }
