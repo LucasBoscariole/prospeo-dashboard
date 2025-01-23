@@ -58,4 +58,12 @@ export async function POST(req: Request) {
   }
 }
 
-export const allowedMethods = ["POST"];
+export async function OPTIONS() {
+  return NextResponse.json(
+    {
+      req_status: false,
+      error_toast: "Method Not Allowed",
+    },
+    { status: 405 }
+  );
+}
