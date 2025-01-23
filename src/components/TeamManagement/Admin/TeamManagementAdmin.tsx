@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { AddTeamMember } from "./AddTeamMember";
+import { TeamMembersAdmin } from "./TeamMembersAdmin";
 
 export const TeamManagementAdmin: React.FC = () => {
-
   return (
     <>
-      <div className="flex items-center justify-between">
-        <h1 className="px-2 text-2xl font-semibold text-dark mb-4">
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="px-2 text-2xl font-semibold text-dark">
           Team Management
         </h1>
         <button className="white-button">
@@ -24,6 +24,8 @@ export const TeamManagementAdmin: React.FC = () => {
         <h2 className="text-xl font-medium text-dark mb-8">Add a member</h2>
         <AddTeamMember />
       </div>
+      
+      <TeamMembersAdmin />
     </>
   );
 };

@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
 import React, { useEffect } from "react";
-import { TeamManagementAdmin } from "./TeamManagementAdmin";
+import { TeamManagementAdmin } from "./Admin/TeamManagementAdmin";
 import { useTeamStore } from "@/store/teamStore";
 import { TeamData } from "@/types/ITeam";
+import { TeamManagementClient } from "./Client/TeamManagementClient";
 
 export const TeamManagementWrapper: React.FC<{
   teamDataAPI: TeamData;
@@ -12,7 +13,7 @@ export const TeamManagementWrapper: React.FC<{
 
   useEffect(() => {
     setTeamData(teamDataAPI);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teamDataAPI]);
 
   return (
@@ -20,7 +21,7 @@ export const TeamManagementWrapper: React.FC<{
       {teamData?.response?.permissions?.crm === true ? (
         <TeamManagementAdmin />
       ) : (
-        <></>
+        <TeamManagementClient />
       )}
     </div>
   );

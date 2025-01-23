@@ -81,8 +81,20 @@ body {
 
   z-index: 1;
 }
+.checkbox-small {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #8c8c8c;
+  border-radius: 3px;
+  position: relative;
 
-.checkbox.active {
+  z-index: 1;
+}
+
+.checkbox.active, .checkbox-small.active {
   background: #ff1a26;
   border: 1px solid #ff1a26;
 }
@@ -96,4 +108,14 @@ body {
   transform: rotate(-45deg);
   position: absolute;
   top: 5px;
+}
+.checkbox-small.active::after {
+  content: "";
+  width: 10px;
+  height: 4px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 4px;
 }

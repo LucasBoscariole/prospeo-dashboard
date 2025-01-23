@@ -35,7 +35,7 @@ export interface ITeamMember {
   user_oid: string;
   name: string;
   email: string;
-  action: string;
+  action: "leave" | "cancel_invite";
   permissions: ITeamPermissions;
 }
 export interface IAddMemberPermission {
