@@ -9,6 +9,7 @@ import { TeamManagementClient } from "./Client/TeamManagementClient";
 export const TeamManagementWrapper: React.FC<{
   teamDataAPI: TeamData;
 }> = ({ teamDataAPI }) => {
+  console.log(teamDataAPI);
   const { teamData, setTeamData } = useTeamStore();
   const [loading, setLoading] = useState<boolean>(true);
 
