@@ -34,7 +34,6 @@ export default function RootLayout({
           sizes="32x32"
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className="flex h-screen">
